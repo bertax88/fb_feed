@@ -1,7 +1,6 @@
 from feedgen.feed import FeedGenerator
 from datetime import datetime, timezone
 
-# Read and parse
 with open('fb_posts.txt', 'r') as f:
     lines = [line.strip() for line in f if line.strip()]
 
@@ -16,17 +15,15 @@ for line in lines:
 if current:
     posts.append(current)
 
-# Set up feed
 fg = FeedGenerator()
 fg.title('Facebook Group Digest')
-fg.link(href='http://localhost/fb')
-fg.description('Curated Facebook group posts + comments')
+fg.link(href='https://www.facebook.com/groups/ssaexpats/')
+fg.description('Manual Facebook group summary with comments')
 fg.updated(datetime.now(timezone.utc))
 
-# Add entries
 for post in posts:
     if len(post) < 2:
-        continue  # skip incomplete blocks
+        continue
 
     title = post[0]
     url = post[1]
@@ -35,10 +32,9 @@ for post in posts:
     fe = fg.add_entry()
     fe.title(title)
     fe.link(href=url)
-    fe.description(comments)
+    fe.description(f"{comments}")
     fe.pubDate(datetime.now(timezone.utc))
 
-# Save RSS file
 output_path = '/storage/emulated/0/Documents/rss/facebook_feed.xml'
 fg.rss_file(output_path)
-print(f"✅ RSS feed with links saved to: {output_path}")
+print(f"✅ RSS feed with links and comments saved to: {output_path}")

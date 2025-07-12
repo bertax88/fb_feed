@@ -19,7 +19,7 @@ if current:
 
 for i, post in enumerate(posts, 1):
     if len(post) < 2:
-        continue  # Skip incomplete posts
+        continue
 
     title = post[0].replace('/', '-')
     url = post[1]
@@ -37,4 +37,4 @@ for i, post in enumerate(posts, 1):
             else:
                 md.write(f"{line}\n\n")
 
-print(f"✅ Markdown posts with links saved to {obsidian_dir}")
+print(f"✅ Markdown with links + all comments saved to: {obsidian_dir}")
